@@ -10,6 +10,7 @@ const url =require('url');
 const StringDecoder =require('string_decoder').StringDecoder;
 const config=require('./config');
 const fs =require('fs');
+const handlers = require('./lib/handlers');
 
 //Initilizing http server
 var httpServer= http.createServer(function(req,res){
@@ -103,19 +104,6 @@ var unifiedServer = function(req,res){
 
 };
 
-
-
-//Defining the handler
-var handlers={};
-
-//Ping handler
-handlers.ping=function(data,callback){
-   callback(200)
-};
-
-handlers.notFound =function(data,callback){
-	callback(404); //just callbak the response code 404
-};
 
 //Defining a request router
 var router={
