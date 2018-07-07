@@ -4,8 +4,8 @@
  */
 
 //Dependencies
-var http= require('http');
-var https=require('https');
+const http= require('http');
+const https=require('https');
 const url =require('url');
 const StringDecoder =require('string_decoder').StringDecoder;
 const config=require('./config');
@@ -39,10 +39,10 @@ httpsServer.listen(config.httpsPort,function(){
 //Server logic for both the http and https server
 var unifiedServer = function(req,res){
 
-		//parse url from req object
+    //parse url from req object
      var parsedUrl=url.parse(req.url,true);
 
-	//get the path and request method
+    //get the path and request method
      var path =parsedUrl.pathname;
      var trimmedPath=path.replace(/^\/+|\/$/g,"");
      var method=req.method.toLowerCase();
@@ -108,10 +108,9 @@ var unifiedServer = function(req,res){
 //Defining the handler
 var handlers={};
 
-//Sample handler
-handlers.sample=function(data,callback){
-   //Callback a http status code, and a payload object
-   callback(406,{'name':'sample handler'});
+//Ping handler
+handlers.ping=function(data,callback){
+   callback(200)
 };
 
 handlers.notFound =function(data,callback){
@@ -120,5 +119,5 @@ handlers.notFound =function(data,callback){
 
 //Defining a request router
 var router={
-   'sample':handlers.sample
+   'ping':handlers.ping
 };
